@@ -1,0 +1,832 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%pyspark\n\nimport pyspark.sql.functions as F\n\n# Full chart\ndf = spark.read.parquet(\"./pillar/parquet/zeppelin_sample_data/*\")\ndf.registerTempTable(\"full\")\n# Gender charts\ngender = df.groupBy('gender','time_period','type').agg(F.sum('count').alias('count'))\ngender.registerTempTable(\"gender\")\n# Age charts\nage = df.groupBy('age','time_period','type').agg(F.sum('count').alias('count'))\nage.registerTempTable('age')",
+      "user": "anonymous",
+      "dateUpdated": "2020-03-20T21:29:16-0700",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.1.95:4041/jobs/job?id=99",
+              "$$hashKey": "object:15511"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1584578994881_-919641332",
+      "id": "paragraph_1584578994881_-919641332",
+      "dateCreated": "2020-03-18T17:49:54-0700",
+      "dateStarted": "2020-03-20T21:29:16-0700",
+      "dateFinished": "2020-03-20T21:29:17-0700",
+      "status": "FINISHED",
+      "$$hashKey": "object:333"
+    },
+    {
+      "text": "%md\n\n### Generic trend\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-03-20T21:33:40-0700",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1584765212300_-874845436",
+      "id": "paragraph_1584765212300_-874845436",
+      "dateCreated": "2020-03-20T21:33:32-0700",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:18450",
+      "dateFinished": "2020-03-20T21:33:40-0700",
+      "dateStarted": "2020-03-20T21:33:40-0700",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>Generic trend</h3>\n\n</div>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%sql\n\nselect * from full\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-03-20T21:38:51-0700",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "lineChart",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "age": "string",
+                      "count": "string",
+                      "gender": "string",
+                      "time_period": "string",
+                      "type": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "time_period",
+                  "index": 3,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [
+                {
+                  "name": "type",
+                  "index": 4,
+                  "aggr": "sum"
+                }
+              ],
+              "values": [
+                {
+                  "name": "count",
+                  "index": 1,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.1.95:4041/jobs/job?id=128",
+              "$$hashKey": "object:20007"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1584765222657_-1591697251",
+      "id": "paragraph_1584765222657_-1591697251",
+      "dateCreated": "2020-03-20T21:33:42-0700",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:18531",
+      "dateFinished": "2020-03-20T21:34:08-0700",
+      "dateStarted": "2020-03-20T21:34:08-0700",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "age\tcount\tgender\ttime_period\ttype\n1\t1000\tM\t1\tall\n1\t300\tM\t1\tsuperactive\n1\t200\tM\t1\tfrequent\n1\t100\tM\t1\tdormant\n1\t400\tM\t1\tnon-active\n1\t1000\tM\t2\tall\n1\t200\tM\t2\tsuperactive\n1\t300\tM\t2\tfrequent\n1\t200\tM\t2\tdormant\n1\t300\tM\t2\tnon-active\n1\t1000\tM\t3\tall\n1\t150\tM\t3\tsuperactive\n1\t250\tM\t3\tfrequent\n1\t100\tM\t3\tdormant\n1\t500\tM\t3\tnon-active\n1\t1000\tM\t4\tall\n1\t100\tM\t4\tsuperactive\n1\t200\tM\t4\tfrequent\n1\t50\tM\t4\tdormant\n1\t650\tM\t4\tnon-active\n1\t1000\tM\t5\tall\n1\t50\tM\t5\tsuperactive\n1\t150\tM\t5\tfrequent\n1\t10\tM\t5\tdormant\n1\t790\tM\t5\tnon-active\n1\t1000\tF\t1\tall\n1\t300\tF\t1\tsuperactive\n1\t200\tF\t1\tfrequent\n1\t100\tF\t1\tdormant\n1\t400\tF\t1\tnon-active\n1\t1000\tF\t2\tall\n1\t200\tF\t2\tsuperactive\n1\t300\tF\t2\tfrequent\n1\t200\tF\t2\tdormant\n1\t300\tF\t2\tnon-active\n1\t1000\tF\t3\tall\n1\t150\tF\t3\tsuperactive\n1\t250\tF\t3\tfrequent\n1\t100\tF\t3\tdormant\n1\t500\tF\t3\tnon-active\n1\t1000\tF\t4\tall\n1\t100\tF\t4\tsuperactive\n1\t200\tF\t4\tfrequent\n1\t50\tF\t4\tdormant\n1\t650\tF\t4\tnon-active\n1\t1000\tF\t5\tall\n1\t50\tF\t5\tsuperactive\n1\t150\tF\t5\tfrequent\n1\t10\tF\t5\tdormant\n1\t790\tF\t5\tnon-active\n2\t1000\tM\t1\tall\n2\t600\tM\t1\tsuperactive\n2\t300\tM\t1\tfrequent\n2\t100\tM\t1\tdormant\n2\t0\tM\t1\tnon-active\n2\t1000\tM\t2\tall\n2\t300\tM\t2\tsuperactive\n2\t500\tM\t2\tfrequent\n2\t50\tM\t2\tdormant\n2\t150\tM\t2\tnon-active\n2\t1000\tM\t3\tall\n2\t550\tM\t3\tsuperactive\n2\t250\tM\t3\tfrequent\n2\t100\tM\t3\tdormant\n2\t100\tM\t3\tnon-active\n2\t1000\tM\t4\tall\n2\t400\tM\t4\tsuperactive\n2\t200\tM\t4\tfrequent\n2\t150\tM\t4\tdormant\n2\t250\tM\t4\tnon-active\n2\t1000\tM\t5\tall\n2\t200\tM\t5\tsuperactive\n2\t300\tM\t5\tfrequent\n2\t200\tM\t5\tdormant\n2\t300\tM\t5\tnon-active\n2\t1000\tF\t1\tall\n2\t800\tF\t1\tsuperactive\n2\t100\tF\t1\tfrequent\n2\t50\tF\t1\tdormant\n2\t50\tF\t1\tnon-active\n2\t1000\tF\t2\tall\n2\t700\tF\t2\tsuperactive\n2\t200\tF\t2\tfrequent\n2\t50\tF\t2\tdormant\n2\t50\tF\t2\tnon-active\n2\t1000\tF\t3\tall\n2\t600\tF\t3\tsuperactive\n2\t250\tF\t3\tfrequent\n2\t70\tF\t3\tdormant\n2\t80\tF\t3\tnon-active\n2\t1000\tF\t4\tall\n2\t500\tF\t4\tsuperactive\n2\t250\tF\t4\tfrequent\n2\t100\tF\t4\tdormant\n2\t150\tF\t4\tnon-active\n2\t1000\tF\t5\tall\n2\t400\tF\t5\tsuperactive\n2\t100\tF\t5\tfrequent\n2\t300\tF\t5\tdormant\n2\t200\tF\t5\tnon-active\n3\t1000\tM\t1\tall\n3\t200\tM\t1\tsuperactive\n3\t300\tM\t1\tfrequent\n3\t200\tM\t1\tdormant\n3\t300\tM\t1\tnon-active\n3\t1000\tM\t2\tall\n3\t200\tM\t2\tsuperactive\n3\t300\tM\t2\tfrequent\n3\t200\tM\t2\tdormant\n3\t300\tM\t2\tnon-active\n3\t1000\tM\t3\tall\n3\t150\tM\t3\tsuperactive\n3\t250\tM\t3\tfrequent\n3\t100\tM\t3\tdormant\n3\t500\tM\t3\tnon-active\n3\t1000\tM\t4\tall\n3\t100\tM\t4\tsuperactive\n3\t200\tM\t4\tfrequent\n3\t50\tM\t4\tdormant\n3\t650\tM\t4\tnon-active\n3\t1000\tM\t5\tall\n3\t50\tM\t5\tsuperactive\n3\t150\tM\t5\tfrequent\n3\t10\tM\t5\tdormant\n3\t790\tM\t5\tnon-active\n3\t1000\tF\t1\tall\n3\t300\tF\t1\tsuperactive\n3\t200\tF\t1\tfrequent\n3\t100\tF\t1\tdormant\n3\t400\tF\t1\tnon-active\n3\t1000\tF\t2\tall\n3\t200\tF\t2\tsuperactive\n3\t300\tF\t2\tfrequent\n3\t200\tF\t2\tdormant\n3\t300\tF\t2\tnon-active\n3\t1000\tF\t3\tall\n3\t150\tF\t3\tsuperactive\n3\t250\tF\t3\tfrequent\n3\t100\tF\t3\tdormant\n3\t500\tF\t3\tnon-active\n3\t1000\tF\t4\tall\n3\t100\tF\t4\tsuperactive\n3\t200\tF\t4\tfrequent\n3\t50\tF\t4\tdormant\n3\t650\tF\t4\tnon-active\n3\t1000\tF\t5\tall\n3\t50\tF\t5\tsuperactive\n3\t150\tF\t5\tfrequent\n3\t10\tF\t5\tdormant\n3\t790\tF\t5\tnon-active\n"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%md\n\n### Grouping by age\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-03-20T21:27:04-0700",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1584764742365_-734299303",
+      "id": "paragraph_1584764742365_-734299303",
+      "dateCreated": "2020-03-20T21:25:42-0700",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:10150",
+      "dateFinished": "2020-03-20T21:27:04-0700",
+      "dateStarted": "2020-03-20T21:27:04-0700",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>Grouping by age</h3>\n\n</div>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%sql\nselect * from age where age=\"${age=1,1|2|3}\" ",
+      "user": "anonymous",
+      "dateUpdated": "2020-03-20T21:39:00-0700",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "lineChart",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "age": "string",
+                      "count": "string",
+                      "gender": "string",
+                      "time_period": "string",
+                      "type": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "time_period",
+                  "index": 1,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [
+                {
+                  "name": "type",
+                  "index": 2,
+                  "aggr": "sum"
+                }
+              ],
+              "values": [
+                {
+                  "name": "count",
+                  "index": 3,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql",
+        "runOnSelectionChange": true
+      },
+      "settings": {
+        "params": {
+          "age": "1"
+        },
+        "forms": {
+          "age": {
+            "type": "Select",
+            "options": [
+              {
+                "value": "1",
+                "$$hashKey": "object:20597"
+              },
+              {
+                "value": "2",
+                "$$hashKey": "object:20598"
+              },
+              {
+                "value": "3",
+                "$$hashKey": "object:20599"
+              }
+            ],
+            "name": "age",
+            "defaultValue": "1",
+            "hidden": false,
+            "$$hashKey": "object:20586"
+          }
+        }
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.1.95:4041/jobs/job?id=134",
+              "$$hashKey": "object:20600"
+            },
+            {
+              "jobUrl": "http://192.168.1.95:4041/jobs/job?id=135",
+              "$$hashKey": "object:20601"
+            },
+            {
+              "jobUrl": "http://192.168.1.95:4041/jobs/job?id=136",
+              "$$hashKey": "object:20602"
+            },
+            {
+              "jobUrl": "http://192.168.1.95:4041/jobs/job?id=137",
+              "$$hashKey": "object:20603"
+            },
+            {
+              "jobUrl": "http://192.168.1.95:4041/jobs/job?id=138",
+              "$$hashKey": "object:20604"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1584764780874_-1951530000",
+      "id": "paragraph_1584764780874_-1951530000",
+      "dateCreated": "2020-03-20T21:26:20-0700",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:10231",
+      "dateFinished": "2020-03-20T21:39:01-0700",
+      "dateStarted": "2020-03-20T21:39:01-0700",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "age\ttime_period\ttype\tcount\n1\t1\tall\t2000\n1\t1\tfrequent\t400\n1\t5\tfrequent\t300\n1\t1\tsuperactive\t600\n1\t4\tsuperactive\t200\n1\t4\tall\t2000\n1\t4\tnon-active\t1300\n1\t3\tsuperactive\t300\n1\t3\tdormant\t200\n1\t5\tnon-active\t1580\n1\t2\tfrequent\t600\n1\t3\tfrequent\t500\n1\t3\tnon-active\t1000\n1\t2\tnon-active\t600\n1\t5\tsuperactive\t100\n1\t1\tnon-active\t800\n1\t4\tfrequent\t400\n1\t1\tdormant\t200\n1\t2\tdormant\t400\n1\t2\tall\t2000\n1\t4\tdormant\t100\n1\t5\tall\t2000\n1\t2\tsuperactive\t400\n1\t3\tall\t2000\n1\t5\tdormant\t20\n"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%md\n\n### Grouping by gender\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-03-20T21:31:05-0700",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1584765058402_173747733",
+      "id": "paragraph_1584765058402_173747733",
+      "dateCreated": "2020-03-20T21:30:58-0700",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:17682",
+      "dateFinished": "2020-03-20T21:31:05-0700",
+      "dateStarted": "2020-03-20T21:31:05-0700",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>Grouping by gender</h3>\n\n</div>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%sql\nselect * from gender where gender=\"${gender=M,M|F}\" ",
+      "user": "anonymous",
+      "dateUpdated": "2020-03-20T21:29:58-0700",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "lineChart",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "age": "string",
+                      "count": "string",
+                      "gender": "string",
+                      "time_period": "string",
+                      "type": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "time_period",
+                  "index": 1,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [
+                {
+                  "name": "type",
+                  "index": 2,
+                  "aggr": "sum"
+                }
+              ],
+              "values": [
+                {
+                  "name": "count",
+                  "index": 3,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql",
+        "runOnSelectionChange": true
+      },
+      "settings": {
+        "params": {
+          "gender": "F"
+        },
+        "forms": {
+          "gender": {
+            "type": "Select",
+            "options": [
+              {
+                "value": "M",
+                "$$hashKey": "object:17496"
+              },
+              {
+                "value": "F",
+                "$$hashKey": "object:17497"
+              }
+            ],
+            "name": "gender",
+            "defaultValue": "M",
+            "hidden": false,
+            "$$hashKey": "object:17485"
+          }
+        }
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.1.95:4041/jobs/job?id=120",
+              "$$hashKey": "object:17498"
+            },
+            {
+              "jobUrl": "http://192.168.1.95:4041/jobs/job?id=121",
+              "$$hashKey": "object:17499"
+            },
+            {
+              "jobUrl": "http://192.168.1.95:4041/jobs/job?id=122",
+              "$$hashKey": "object:17500"
+            },
+            {
+              "jobUrl": "http://192.168.1.95:4041/jobs/job?id=123",
+              "$$hashKey": "object:17501"
+            },
+            {
+              "jobUrl": "http://192.168.1.95:4041/jobs/job?id=124",
+              "$$hashKey": "object:17502"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1584764872105_241223669",
+      "id": "paragraph_1584764872105_241223669",
+      "dateCreated": "2020-03-20T21:27:52-0700",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:12472",
+      "dateFinished": "2020-03-20T21:29:59-0700",
+      "dateStarted": "2020-03-20T21:29:58-0700",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "gender\ttime_period\ttype\tcount\nF\t2\tdormant\t450\nF\t1\tnon-active\t850\nF\t3\tdormant\t270\nF\t3\tfrequent\t750\nF\t3\tsuperactive\t900\nF\t4\tdormant\t200\nF\t3\tall\t3000\nF\t4\tnon-active\t1450\nF\t4\tfrequent\t650\nF\t2\tsuperactive\t1100\nF\t2\tfrequent\t800\nF\t5\tsuperactive\t500\nF\t1\tsuperactive\t1400\nF\t1\tall\t3000\nF\t1\tfrequent\t500\nF\t5\tall\t3000\nF\t4\tsuperactive\t700\nF\t5\tnon-active\t1780\nF\t2\tnon-active\t650\nF\t5\tfrequent\t400\nF\t2\tall\t3000\nF\t3\tnon-active\t1080\nF\t4\tall\t3000\nF\t5\tdormant\t320\nF\t1\tdormant\t250\n"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%md\n\n### More fine-grained selections: age-gender pair analysis",
+      "user": "anonymous",
+      "dateUpdated": "2020-03-20T21:26:44-0700",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1584764677014_-639423331",
+      "id": "paragraph_1584764677014_-639423331",
+      "dateCreated": "2020-03-20T21:24:37-0700",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:10060",
+      "dateFinished": "2020-03-20T21:26:44-0700",
+      "dateStarted": "2020-03-20T21:26:44-0700",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>More fine-grained selections: age-gender pair analysis</h3>\n\n</div>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%sql\nselect * from full where age=\"${age=1,1|2|3}\" and gender=\"${gender=M,M|F}\" ",
+      "user": "anonymous",
+      "dateUpdated": "2020-03-20T21:31:19-0700",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "lineChart",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "age": "string",
+                      "count": "string",
+                      "gender": "string",
+                      "time_period": "string",
+                      "type": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "stackedAreaChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "time_period",
+                  "index": 3,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [
+                {
+                  "name": "type",
+                  "index": 4,
+                  "aggr": "sum"
+                }
+              ],
+              "values": [
+                {
+                  "name": "count",
+                  "index": 1,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql",
+        "runOnSelectionChange": true
+      },
+      "settings": {
+        "params": {
+          "age": "1",
+          "gender": "F"
+        },
+        "forms": {
+          "age": {
+            "type": "Select",
+            "options": [
+              {
+                "value": "1",
+                "$$hashKey": "object:18274"
+              },
+              {
+                "value": "2",
+                "$$hashKey": "object:18275"
+              },
+              {
+                "value": "3",
+                "$$hashKey": "object:18276"
+              }
+            ],
+            "name": "age",
+            "defaultValue": "1",
+            "hidden": false,
+            "$$hashKey": "object:18260"
+          },
+          "gender": {
+            "type": "Select",
+            "options": [
+              {
+                "value": "M",
+                "$$hashKey": "object:18285"
+              },
+              {
+                "value": "F",
+                "$$hashKey": "object:18286"
+              }
+            ],
+            "name": "gender",
+            "defaultValue": "M",
+            "hidden": false,
+            "$$hashKey": "object:18261"
+          }
+        }
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.1.95:4041/jobs/job?id=126",
+              "$$hashKey": "object:18287"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1584762814697_761323870",
+      "id": "paragraph_1584762814697_761323870",
+      "dateCreated": "2020-03-20T20:53:34-0700",
+      "status": "FINISHED",
+      "$$hashKey": "object:334",
+      "dateFinished": "2020-03-20T21:31:19-0700",
+      "dateStarted": "2020-03-20T21:31:19-0700",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "age\tcount\tgender\ttime_period\ttype\n1\t1000\tF\t1\tall\n1\t300\tF\t1\tsuperactive\n1\t200\tF\t1\tfrequent\n1\t100\tF\t1\tdormant\n1\t400\tF\t1\tnon-active\n1\t1000\tF\t2\tall\n1\t200\tF\t2\tsuperactive\n1\t300\tF\t2\tfrequent\n1\t200\tF\t2\tdormant\n1\t300\tF\t2\tnon-active\n1\t1000\tF\t3\tall\n1\t150\tF\t3\tsuperactive\n1\t250\tF\t3\tfrequent\n1\t100\tF\t3\tdormant\n1\t500\tF\t3\tnon-active\n1\t1000\tF\t4\tall\n1\t100\tF\t4\tsuperactive\n1\t200\tF\t4\tfrequent\n1\t50\tF\t4\tdormant\n1\t650\tF\t4\tnon-active\n1\t1000\tF\t5\tall\n1\t50\tF\t5\tsuperactive\n1\t150\tF\t5\tfrequent\n1\t10\tF\t5\tdormant\n1\t790\tF\t5\tnon-active\n"
+          }
+        ]
+      }
+    }
+  ],
+  "name": "pillar",
+  "id": "2F6AMZ294",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0-SNAPSHOT",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/pillar"
+}
